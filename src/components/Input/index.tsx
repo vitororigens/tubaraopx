@@ -1,6 +1,6 @@
 import React from "react";
 import { TextInputProps } from "react-native";
-import { Container } from "./style";
+import { Button, Container, Icon, InputContainer } from "./style";
 
 type InputProps = TextInputProps & {
     placeholder: string;
@@ -8,6 +8,12 @@ type InputProps = TextInputProps & {
 
 export function Input({ placeholder, ...rest }: InputProps) {
     return (
-        <Container placeholder={placeholder} {...rest} />
+
+        <Container  {...rest} >
+            <InputContainer placeholder={placeholder} />
+            <Button>
+                <Icon name="eye" />
+            </Button>
+        </Container>
     );
 }
