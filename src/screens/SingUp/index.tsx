@@ -3,16 +3,14 @@ import { DefaultContainer } from "../../components/DefaultContainer";
 import { Input } from "../../components/Input";
 import { ButtonIcon, Container, Content, Divider, Icon, Text, Title } from "./style";
 
-export function Register() {
+export function SingUp() {
     return (
         <DefaultContainer backButton>
             <Container>
-                <Title>Cadastrar</Title>
-                <Input placeholder="Nome Completo" />
+                <Title>Entrar</Title>
                 <Input placeholder="E-mail" />
-                <Input showIcon placeholder="Cadastre sua senha" />
-                <Input showIcon placeholder="Cadastre sua senha novamente" />
-                <Button title="Cadastrar" />
+                <Input showIcon placeholder="Senha" />
+
                 <Content>
                     <Divider />
                     <Text>Ou</Text>
@@ -30,7 +28,7 @@ export function Register() {
                     </ButtonIcon>
                 </Content>
 
-                <Content><Text>Já possui uma conta? </Text><ButtonIcon ><Text style={{
+                <Content><Text>Ainda não possui uma conta? </Text><ButtonIcon ><Text style={{
                    color:'#0078d4'
                 }}>Entre aqui.</Text></ButtonIcon></Content>
             </Container>

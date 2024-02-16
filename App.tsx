@@ -4,7 +4,7 @@ import { StatusBar } from 'react-native'
 //
 import { Loading } from './src/components/Loading';
 import theme from './src/theme';
-import { Register } from './src/screens/Register';
+import { SingUp } from './src/screens/SingUp';
 
 export default function App() {
   const [fontLoader] = useFonts({
@@ -21,7 +21,7 @@ export default function App() {
       translucent
       
       />
-        {fontLoader ? <Register/> : <Loading/>}
+        {fontLoader ? <SingUp/> : <Loading/>}
     </ThemeProvider>
    
   );

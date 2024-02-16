@@ -12,6 +12,7 @@ max-height: 80px;
 border-radius: 30px;
 padding: 16px;
 border: 2px solid ${({theme}) => theme.COLORS.GRAY_600};
+margin-bottom: 10px;
 `
 
 export const InputContainer = styled(TextInput).attrs(({theme}) => ({
@@ -32,6 +33,6 @@ export const Button = styled(TouchableOpacity)``;
 
 
 export const Icon = styled(Octicons).attrs(({theme}) => ({
-    color: theme.COLORS.GRAY_300,
+    color: theme.COLORS.GRAY_400,
     size: 32,
 }))``;
