@@ -3,8 +3,8 @@ import { ThemeProvider } from 'styled-components';
 import { StatusBar } from 'react-native'
 //
 import { Loading } from './src/components/Loading';
+import { Routes } from './src/routes';
 import theme from './src/theme';
-import { SingUp } from './src/screens/SingUp';
 
 export default function App() {
   const [fontLoader] = useFonts({
@@ -21,7 +21,7 @@ export default function App() {
       translucent
       
       />
-        {fontLoader ? <SingUp/> : <Loading/>}
+        {fontLoader ? <Routes/> : <Loading/>}
     </ThemeProvider>
    
   );
