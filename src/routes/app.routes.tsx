@@ -3,6 +3,7 @@ import { Start } from '../screens/Start';
 import { RegisterOrSingUp } from '../screens/RegisterOrSingUp';
 import { Register } from '../screens/Register';
 import { SingUp } from '../screens/SingUp';
+import { Home } from '../screens/Home';
 
 const { Navigator, Screen } = createNativeStackNavigator();
 
@@ -27,6 +28,10 @@ export function AppRoutes() {
             <Screen
                 name='singup'
                 component={SingUp}
+            />
+            <Screen
+                name='home'
+                component={Home}
             />
         </Navigator>
     )

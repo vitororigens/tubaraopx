@@ -15,24 +15,36 @@
       "**/*"
     ],
     "ios": {
+      "googleServicesFile": "./GoogleService-Info.plist",
+      "bundleIdentifier": "com.tubaraopx.app",
       "supportsTablet": true
     },
     "android": {
+      "googleServicesFile": "./google-services.json",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#1C1B1B"
-      }
+      },
+      "package": "com.tubaraopx.app"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
-      [
-        "expo-font",
-        {
-          "fonts": ["path/to/file.ttf"]
-        }
-      ]
-    ]
+        "@react-native-firebase/app",
+        "@react-native-firebase/auth"
+    ],
+    
+    "extra": {
+      "eas": {
+        "projectId": "5c9a85d3-277a-4f29-b484-e303cb600cdb"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/5c9a85d3-277a-4f29-b484-e303cb600cdb"
+    }
   }
 }

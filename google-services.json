@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "80744448928",
+    "project_id": "tubaraopx-academy",
+    "storage_bucket": "tubaraopx-academy.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:80744448928:android:098ed445ac5f57bc989ac5",
+        "android_client_info": {
+          "package_name": "com.tubaraopx.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJ2cUku8dZNdOAa8HWn7NZB50oAh5o7pw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

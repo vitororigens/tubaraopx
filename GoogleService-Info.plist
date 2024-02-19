@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyBo42wB_QfS7yAik9vT7OQEk6SW2fR0y8I</string>
+	<key>GCM_SENDER_ID</key>
+	<string>80744448928</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.tubaraopx.app</string>
+	<key>PROJECT_ID</key>
+	<string>tubaraopx-academy</string>
+	<key>STORAGE_BUCKET</key>
+	<string>tubaraopx-academy.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:80744448928:ios:c874f7164d03ec4d989ac5</string>
+</dict>
+</plist>

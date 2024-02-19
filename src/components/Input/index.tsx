@@ -4,14 +4,15 @@ import { Button, Container, Icon, InputContainer } from "./style";
 
 type InputProps = TextInputProps & {
     placeholder: string;
-    showIcon?: boolean
+    showIcon?: boolean;
+    onChangeText?: (text: string) => void;
 }
 
-export function Input({ placeholder, showIcon = false, ...rest }: InputProps) {
+export function Input({ placeholder, onChangeText, showIcon = false, ...rest }: InputProps) {
     return (
 
         <Container  {...rest} >
-            <InputContainer placeholder={placeholder} />
+            <InputContainer placeholder={placeholder}  onChangeText={onChangeText} />
             {showIcon &&
                 <Button>
                     <Icon name="eye" />
