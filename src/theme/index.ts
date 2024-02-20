@@ -3,6 +3,8 @@ export default {
     WHITE: '#FFFFFF',
 
     BLUE_400: '#5876CE',
+    RED_700: '#b91c1c',
+    GREEN_700: '#15803d',
 
     GRAY_100: '#E1E1E1',
     GRAY_200: '#D6D6D6',
@@ -10,6 +12,7 @@ export default {
     GRAY_400: '#959595',
     GRAY_600: '#2C2C2C',
     GRAY_800: '#1C1B1B',
+    
 
   },
   FONT_FAMILY: {

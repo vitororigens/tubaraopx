@@ -24,7 +24,6 @@ export function Home() {
                
                 const cursosArray: ItemData[] = [];
                 for (const ref of res.items) {
-                    console.log("titulo", ref)
                     const cursoPath = ref.fullPath;
                     const url = await reference.ref(cursoPath).getDownloadURL();
                     const itemData: ItemData = {
@@ -50,7 +49,7 @@ export function Home() {
     };
 
     return (
-        <DefaultContainer>
+        <DefaultContainer backButton>
             <Container>
                 <Title>Playlist</Title>
                 <FlatList
@@ -58,7 +57,7 @@ export function Home() {
                     renderItem={({ item }) => (
                         <Multimidia title={item.cursoName} playButton={() => handlePlayAudio(item.cursoUrl)} />
                     )}
-                    keyExtractor={(item, index) => index.toString()}
+                    keyExtractor={(index) => index.toString()}
                 />
             </Container>
         </DefaultContainer>

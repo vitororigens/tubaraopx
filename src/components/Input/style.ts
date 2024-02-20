@@ -7,9 +7,9 @@ flex: 1;
 flex-direction: row;
 align-items: center;
 justify-content: center;
-min-height: 80px;
-max-height: 80px;
-border-radius: 30px;
+min-height: 60px;
+max-height: 60px;
+border-radius: 20px;
 padding: 16px;
 border: 2px solid ${({theme}) => theme.COLORS.GRAY_600};
 margin-bottom: 10px;
@@ -20,8 +20,8 @@ export const InputContainer = styled(TextInput).attrs(({theme}) => ({
 }))`
 flex: 1;
 
-min-height: 80px;
-max-height: 80px;
+min-height: 60px;
+max-height: 60px;
 
 
 color: ${({theme}) => theme.COLORS.WHITE};
@@ -34,5 +34,5 @@ export const Button = styled(TouchableOpacity)``;
 
 export const Icon = styled(Octicons).attrs(({theme}) => ({
     color: theme.COLORS.GRAY_400,
-    size: 32,
+    size: 26
 }))``;

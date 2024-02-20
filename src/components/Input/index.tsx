@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { TextInputProps } from "react-native";
 import { Button, Container, Icon, InputContainer } from "./style";
 
@@ -6,18 +6,30 @@ type InputProps = TextInputProps & {
     placeholder: string;
     showIcon?: boolean;
     onChangeText?: (text: string) => void;
+    required?: boolean;
+    passwordType?: boolean;
 }
 
-export function Input({ placeholder, onChangeText, showIcon = false, ...rest }: InputProps) {
-    return (
+export function Input({ placeholder, onChangeText, showIcon = false, passwordType = false, }: InputProps) {
+    const [showPassword, setShowPassword] = useState(false);
 
-        <Container  {...rest} >
-            <InputContainer placeholder={placeholder}  onChangeText={onChangeText} />
-            {showIcon &&
-                <Button>
-                    <Icon name="eye" />
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
+
+    return (
+        <Container>
+            <InputContainer
+                placeholder={placeholder}
+                onChangeText={onChangeText}
+                 secureTextEntry={!showPassword && passwordType}
+            />
+            {passwordType && (
+                <Button onPress={togglePasswordVisibility}>
+                    <Icon name={showPassword ? 'eye' : 'eye-closed'} />
                 </Button>
-            }
+            )}
         </Container>
     );
 }

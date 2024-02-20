@@ -3,11 +3,11 @@ import styled from "styled-components/native";
 
 export const Container = styled(TouchableOpacity)`
 flex: 1;
-min-height: 80px;
-max-height: 80px;
+min-height: 60px;
+max-height: 60px;
 background-color: ${({theme}) => theme.COLORS.BLUE_400};
 
-border-radius: 30px;
+border-radius: 20px;
 align-items: center;
 justify-content: center;
 `;

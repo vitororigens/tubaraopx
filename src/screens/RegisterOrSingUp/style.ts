@@ -1,11 +1,18 @@
 import { TouchableOpacity } from "react-native";
 import styled from "styled-components/native";
 
+export const Container = styled.View`
+flex: 1;
+align-items: center;
+justify-content: center;
+
+`; 
+
 export const Logo = styled.Image`
 width: 100%;
-height: 400px;
+height: 300px;
 
-`
+`;
 
 export const Title = styled.Text`
 text-align: center;
