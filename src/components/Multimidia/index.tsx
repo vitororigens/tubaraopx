@@ -1,11 +1,17 @@
 import { ButtonIcon, Container, Duraction, Icon, Title } from "./style";
 
-export function Multimidia(){
+type props ={
+    title?: string,
+    duraction?: string,
+    playButton?: () => void
+}
+
+export function Multimidia({title, duraction, playButton}: props){
     return(
         <Container>
-            <ButtonIcon><Icon name="play"/></ButtonIcon>
-            <Title>curso de fazer bolo</Title>
-            <Duraction>5:33</Duraction>
+            <ButtonIcon onPress={playButton} ><Icon name="play"/></ButtonIcon>
+            <Title>{title}</Title>
+            <Duraction>{duraction}</Duraction>
         </Container>
     )
 }
