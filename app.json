@@ -35,7 +35,6 @@
         "@react-native-firebase/auth",
         "expo-av"
     ],
-    
     "extra": {
       "eas": {
         "projectId": "5c9a85d3-277a-4f29-b484-e303cb600cdb"

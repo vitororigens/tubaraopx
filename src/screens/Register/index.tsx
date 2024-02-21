@@ -1,21 +1,24 @@
 import { ButtonIcon, Container, Content, Divider, Icon, Text, Title } from "./style";
 //
+import { ActivityIndicator, Linking, ScrollView } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import auth from '@react-native-firebase/auth'
 import { useState } from "react";
+import axios from "axios";
 //
 import { DefaultContainer } from "../../components/DefaultContainer";
 import { Button } from "../../components/Button";
 import { useTheme } from "styled-components/native";
 import { Toast } from "react-native-toast-notifications";
 import { Input } from "../../components/Input";
-import { ScrollView } from "react-native";
+
 
 
 
 export function Register() {
     const { COLORS } = useTheme()
     const navigation = useNavigation();
+    const [isLoading, setIsLoading] = useState(false);
     const [user, setUser] = useState({
         name: '',
         email: '',
@@ -76,10 +79,12 @@ export function Register() {
     }
 
     function handleRegister() {
+        setIsLoading(true);
         if (validateForm()) {
             auth()
                 .createUserWithEmailAndPassword(user.email, user.password)
                 .then(() => {
+                    setIsLoading(false);
                     setUser({
                         ...user,
                         name: '',
@@ -87,13 +92,44 @@ export function Register() {
                         password: '',
                         confirmPassword: ''
                     });
+                    axios.post('https://api.mercadopago.com/checkout/preferences', {
+                        items: [
+                            {
+                                title: 'Produto',
+                                quantity: 1,
+                                currency_id: 'BRL',
+                                unit_price: 10,
+                            }
+                        ],
+                        back_urls: {
+                            success: 'com.tubaraopx.app://sucesso',
+                            failure: 'com.tubaraopx.app://falha',
+                            pending: 'com.tubaraopx.app://pendente'
+                        }
+                    }, {
+                        headers: {
+                            'Authorization': 'Bearer APP_USR-7214986829307698-111809-9e2df91c855192a96cd1478281f61eea-390795860'
+                        }
+                    })
+                        .then(response => {
+                            const checkoutProUrl = response.data.init_point;
+                            Linking.openURL(checkoutProUrl);
+                        })
+                        .catch(error => {
+                            console.error('Erro ao obter URL do Checkout Pro:', error);
+                        });
                     Toast.show("Conta cadastrada com sucesso!", { type: 'success' });
                     navigation.navigate('signup');
                 })
-                .catch(() => Toast.show("Não foi possível cadastrar sua conta, verifique", { type: 'danger' }));
+                .catch(() => {
+                    setIsLoading(false);
+                    Toast.show("Não foi possível cadastrar sua conta, verifique", { type: 'danger' });
+                });
+        } else {
+            setIsLoading(false);
         }
     }
-
+    
 
 
     function handleSignUp() {
@@ -102,10 +138,10 @@ export function Register() {
 
     return (
         <DefaultContainer backButton>
-           <ScrollView 
-            contentContainerStyle={{ flexGrow: 1, justifyContent: 'center' }}  
-            showsVerticalScrollIndicator={false}
-            showsHorizontalScrollIndicator={false}>
+            <ScrollView
+                contentContainerStyle={{ flexGrow: 1, justifyContent: 'center' }}
+                showsVerticalScrollIndicator={false}
+                showsHorizontalScrollIndicator={false}>
                 <Container>
                     <Title>Cadastrar</Title>
                     <Input
@@ -135,7 +171,8 @@ export function Register() {
                         secureTextEntry
                     />
                     {errors.nameError && <Text style={{ color: COLORS.RED_700, marginBottom: 10, marginLeft: 10 }}>{errors.confirmPasswordError}</Text>}
-                    <Button title="Cadastrar" onPress={handleRegister} />
+                    <Button title={isLoading ? <ActivityIndicator/> : "Cadastrar"} onPress={handleRegister} disabled={isLoading} />
+
                     <Content>
                         <Divider />
                         <Text>Ou</Text>
