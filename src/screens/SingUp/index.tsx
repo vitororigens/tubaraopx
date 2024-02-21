@@ -9,7 +9,7 @@ import { Toast } from "react-native-toast-notifications";
 import auth from "@react-native-firebase/auth";
 import { useState } from "react";
 
-export function SingUp() {
+export function SignUp() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigation = useNavigation()

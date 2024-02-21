@@ -5,15 +5,15 @@ import { DefaultContainer } from "../../components/DefaultContainer";
 import { useNavigation } from "@react-navigation/native";
 
 
-export function RegisterOrSingUp() {
+export function RegisterOrsignUp() {
   const navigation = useNavigation()
 
   function handlewRegister() {
     navigation.navigate('register')
   }
 
-  function handlewSingUp() {
-    navigation.navigate('singup')
+  function handlewsignUp() {
+    navigation.navigate('signup')
   }
   return (
     <DefaultContainer backButton>
@@ -28,7 +28,7 @@ export function RegisterOrSingUp() {
         <Content>
           <Button onPress={handlewRegister} title="Registrar" />
           <SignIn>
-            <TextButton onPress={handlewSingUp}>
+            <TextButton onPress={handlewsignUp}>
               Entrar
             </TextButton>
           </SignIn>

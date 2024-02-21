@@ -9,8 +9,8 @@ export function Start() {
 
   const navigation = useNavigation()
 
-  function handleRegisterOrSingUp() {
-    navigation.navigate('registerorsingup')
+  function handleRegisterOrsignUp() {
+    navigation.navigate('registerorsignUp')
   }
 
   return (
@@ -24,7 +24,7 @@ export function Start() {
           Cursos completos e atualizados. Mesma didática e conteúdo dos livros e PDF para que você possa ouvir sempre que quiser.
         </SubTitle>
         <Content>
-          <Button onPress={handleRegisterOrSingUp} title="Vamos Começar" />
+          <Button onPress={handleRegisterOrsignUp} title="Vamos Começar" />
         </Content>
       </Container>
     </DefaultContainer>

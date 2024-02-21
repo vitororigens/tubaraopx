@@ -1,9 +1,11 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack'
 import { Start } from '../screens/Start';
-import { RegisterOrSingUp } from '../screens/RegisterOrSingUp';
+
 import { Register } from '../screens/Register';
-import { SingUp } from '../screens/SingUp';
+
 import { Home } from '../screens/Home';
+import { RegisterOrsignUp } from '../screens/RegisterOrSingUp';
+import { SignUp } from '../screens/SingUp';
 
 const { Navigator, Screen } = createNativeStackNavigator();
 
@@ -16,8 +18,8 @@ export function AppRoutes() {
             />
 
             <Screen
-                name='registerorsingup'
-                component={RegisterOrSingUp}
+                name='registerorsignUp'
+                component={RegisterOrsignUp}
             />
 
             <Screen
@@ -26,8 +28,8 @@ export function AppRoutes() {
             />
 
             <Screen
-                name='singup'
-                component={SingUp}
+                name='signup'
+                component={SignUp}
             />
             <Screen
                 name='home'
