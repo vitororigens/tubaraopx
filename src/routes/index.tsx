@@ -1,8 +1,9 @@
 import { NavigationContainer } from "@react-navigation/native";
+import { StackNavigation } from "./StackNavigation";
 //
-import { AppRoutes } from "./app.routes";
-import { View } from "react-native";
 import { useTheme } from "styled-components/native";
+//
+import { View } from "react-native";
 
 export function Routes() {
     const { COLORS } = useTheme();
@@ -12,7 +13,7 @@ export function Routes() {
             flex: 1
         }}>
             <NavigationContainer>
-                <AppRoutes />
+                <StackNavigation/>
             </NavigationContainer>
         </View>
 

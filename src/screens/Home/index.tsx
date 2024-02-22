@@ -3,7 +3,7 @@ import { Multimidia } from "../../components/Multimidia";
 import { Container, Title } from "./style";
 import { firebase } from "../../../config";
 import { useEffect, useState } from "react";
-import { FlatList, Text, TouchableOpacity } from "react-native";
+import { FlatList } from "react-native";
 import { Audio } from 'expo-av';
 
 type ItemData = {
@@ -17,6 +17,7 @@ export function Home() {
     const [sound, setSound] = useState<Audio.Sound | null>(null);
 
     useEffect(() => {
+        
         reference
             .ref('Cursos')
             .listAll()

@@ -11,6 +11,7 @@ import { Button } from "../../components/Button";
 import { useTheme } from "styled-components/native";
 import { Toast } from "react-native-toast-notifications";
 import { Input } from "../../components/Input";
+import apiMercadoPago from "../../services/apiMercadoPago";
 
 
 
@@ -77,7 +78,6 @@ export function Register() {
 
         return isValid;
     }
-
     function handleRegister() {
         setIsLoading(true);
         if (validateForm()) {
@@ -92,32 +92,33 @@ export function Register() {
                         password: '',
                         confirmPassword: ''
                     });
-                    axios.post('https://api.mercadopago.com/checkout/preferences', {
-                        items: [
-                            {
-                                title: 'Produto',
-                                quantity: 1,
-                                currency_id: 'BRL',
-                                unit_price: 10,
-                            }
-                        ],
-                        back_urls: {
-                            success: 'com.tubaraopx.app://sucesso',
-                            failure: 'com.tubaraopx.app://falha',
-                            pending: 'com.tubaraopx.app://pendente'
-                        }
-                    }, {
-                        headers: {
-                            'Authorization': 'Bearer APP_USR-7214986829307698-111809-9e2df91c855192a96cd1478281f61eea-390795860'
-                        }
-                    })
-                        .then(response => {
-                            const checkoutProUrl = response.data.init_point;
-                            Linking.openURL(checkoutProUrl);
-                        })
-                        .catch(error => {
-                            console.error('Erro ao obter URL do Checkout Pro:', error);
-                        });
+                    // apiMercadoPago({
+                    //     items: [
+                    //         {
+                    //             title: 'Cursos Tubarão Pix',
+                    //             quantity: 1,
+                    //             currency_id: 'BRL',
+                    //             unit_price: 0.10,
+                    //         }
+                    //     ],
+                    //     back_urls: {
+                    //         success: 'com.tubaraopx.app://sucesso',
+                    //         failure: 'com.tubaraopx.app://falha',
+                    //         pending: 'com.tubaraopx.app://pendente'
+                    //     }
+                    // }, {
+                    //     headers: {
+                    //         'Authorization': 'Bearer APP_USR-7214986829307698-111809-9e2df91c855192a96cd1478281f61eea-390795860'
+                    //     }
+                    // })
+                    //     .then(response => {
+                    //         const checkoutProUrl = response.data.init_point;
+                    //         Linking.openURL(checkoutProUrl);
+                    //     })
+                    //     .catch(error => {
+                    //         console.error('Erro ao obter URL do Checkout Pro:', error);
+                    //     });
+
                     Toast.show("Conta cadastrada com sucesso!", { type: 'success' });
                     navigation.navigate('signup');
                 })
@@ -129,7 +130,7 @@ export function Register() {
             setIsLoading(false);
         }
     }
-    
+
 
 
     function handleSignUp() {
@@ -171,7 +172,7 @@ export function Register() {
                         secureTextEntry
                     />
                     {errors.nameError && <Text style={{ color: COLORS.RED_700, marginBottom: 10, marginLeft: 10 }}>{errors.confirmPasswordError}</Text>}
-                    <Button title={isLoading ? <ActivityIndicator/> : "Cadastrar"} onPress={handleRegister} disabled={isLoading} />
+                    <Button title={isLoading ? <ActivityIndicator /> : "Cadastrar"} onPress={handleRegister} disabled={isLoading} />
 
                     <Content>
                         <Divider />

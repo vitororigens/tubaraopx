@@ -1,6 +1,7 @@
 import React, { ReactNode } from "react";
 import { BackButton, Button, Container } from "./style";
 import { useNavigation } from "@react-navigation/native";
+import { ScrollView } from "react-native";
 
 type DefaultContainerProps = {
     children: ReactNode;
@@ -10,7 +11,7 @@ type DefaultContainerProps = {
 export function DefaultContainer({ children, backButton = false }: DefaultContainerProps) {
     const navigation = useNavigation()
 
-    function handleGoBack(){
+    function handleGoBack() {
         navigation.goBack()
     }
     return (
@@ -20,7 +21,8 @@ export function DefaultContainer({ children, backButton = false }: DefaultContai
                     <BackButton name="chevron-back-outline" />
                 </Button>
             }
-            {children}
+  
+                {children}
         </Container>
     );
 }
