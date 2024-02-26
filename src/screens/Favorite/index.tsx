@@ -15,7 +15,7 @@ export type ItemData = {
     cursoUrl: string;
 }
 
-export function Home() {
+export function Favorite() {
     const reference = firebase.storage();
     const [cursos, setCursos] = useState<Array<ItemData>>([]);
     const [sound, setSound] = useState<Audio.Sound | null>(null);
@@ -120,68 +120,11 @@ export function Home() {
     return (
         <DefaultContainer>
             <Container>
-                <View style={{
-                    height: 60
-                }}>
-                    <FlatList
-                        showsHorizontalScrollIndicator={false}
-                        data={data}
-                        horizontal={true}
-                        renderItem={({ item }) => (
-                            <Categories title={item.title} />
-                        )}
-                    />
-                </View>
-                <View>
-                    <View style={{
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                        alignItems: 'center'
-                    }}>
-                        <Title>
-                            Novos
-                        </Title>
-                        <Categories title="Mais" />
-                    </View>
-                    <FlatList
-                        showsHorizontalScrollIndicator={false}
-                        horizontal={true}
-                        data={cursos}
-                        renderItem={({ item, index }) => (
-                            <TouchableOpacity onPress={() => openBottomSheet(item, index)}>
-                                <ItemCursos title={item.cursoName} />
-                            </TouchableOpacity>
-                        )}
-                        keyExtractor={(item) => item.cursoName}
-                    />
-                </View>
-                <View>
-                    <View style={{
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                        alignItems: 'center'
-                    }}>
-                        <Title>
-                            Informatica
-                        </Title>
-                        <Categories title="Mais" />
-                    </View>
-                    <FlatList
-                        showsHorizontalScrollIndicator={false}
-                        horizontal={true}
-                        data={cursos}
-                        renderItem={({ item, index }) => (
-                            <TouchableOpacity onPress={() => openBottomSheet(item, index)}>
-                                <ItemCursos title={item.cursoName} />
-                            </TouchableOpacity>
-                        )}
-                        keyExtractor={(item) => item.cursoName}
-                    />
-                </View>
                 <Title>Playlist</Title>
                 <View style={{
                     flex: 1,
-                  
+                    alignItems: 'center',
+                    justifyContent: 'center'
                 }}>
                     <FlatList
                         style={{

@@ -1,15 +1,14 @@
 import styled from "styled-components/native";
 import { AntDesign } from '@expo/vector-icons';
 import { TouchableOpacity } from "react-native";
+import { MaterialIcons } from '@expo/vector-icons';
 
 export const Container = styled.View`
-min-height: 60px;
-max-height: 60px;
+height: 60px;
+width: 100%;
 flex-direction: row;
-
-border-radius: 8px;
 align-items: center;
-justify-content: flex-start;
+justify-content: space-between;
 `;
 
 export const Icon = styled(AntDesign).attrs(({theme}) => ({
@@ -17,8 +16,12 @@ export const Icon = styled(AntDesign).attrs(({theme}) => ({
     size: 18,
 }))``;
 
+export const FavoriteIcon = styled(MaterialIcons).attrs(({theme}) => ({
+    color: theme.COLORS.GRAY_200,
+    size: 18,
+}))``;
+
 export const ButtonIcon = styled(TouchableOpacity)`
-margin-right: 50px;
 `
 
 export const Title = styled.Text`
@@ -30,5 +33,7 @@ export const Title = styled.Text`
 export const Duraction = styled.Text`
     color: ${({theme}) => theme.COLORS.GRAY_200};
     font-size: ${({theme}) => theme.FONTE_SIZE.GG}px;
+    font-family: ${({theme}) => theme.FONT_FAMILY.REGULAR};
+    margin: 20px;
     
 `; 

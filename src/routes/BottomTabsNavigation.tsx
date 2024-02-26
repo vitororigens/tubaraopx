@@ -4,6 +4,8 @@ import { Home } from "../screens/Home";
 import { useTheme } from "styled-components/native";
 import { FontAwesome } from '@expo/vector-icons';
 import { Search } from '../screens/Search';
+import { Favorite } from '../screens/Favorite';
+import { Perfil } from '../screens/Perfil';
 
 const { Navigator, Screen } = createBottomTabNavigator();
 
@@ -53,7 +55,7 @@ export function BottomTabsNavigation() {
                     )
                 }}
                 name="Favorite"
-                component={Home}
+                component={Favorite}
             />
             <Screen
                 options={{
@@ -62,7 +64,7 @@ export function BottomTabsNavigation() {
                     )
                 }}
                 name="perfil"
-                component={Home}
+                component={Perfil}
             />
         </Navigator>
     )
