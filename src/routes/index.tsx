@@ -4,6 +4,7 @@ import { StackNavigation } from "./StackNavigation";
 import { useTheme } from "styled-components/native";
 //
 import { View } from "react-native";
+import { BottomTabsNavigation } from "./BottomTabsNavigation";
 
 export function Routes() {
     const { COLORS } = useTheme();
@@ -13,7 +14,7 @@ export function Routes() {
             flex: 1
         }}>
             <NavigationContainer>
-                <StackNavigation/>
+                <BottomTabsNavigation/>
             </NavigationContainer>
         </View>
 

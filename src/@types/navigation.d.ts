@@ -6,6 +6,7 @@ export declare global{
             register: undefined;
             signup: undefined;
             home: undefined;
+            tabroutes: undefined;
         }
     }
 }

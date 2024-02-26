@@ -6,7 +6,7 @@ import { TouchableOpacity } from 'react-native';
 export const Container = styled(SafeAreaView)`
 flex: 1;
 background-color: ${({ theme }) => theme.COLORS.GRAY_800};
-padding: 0 20px;
+padding: 20px;
 `;
 
 export const Header = styled.View`
@@ -17,6 +17,6 @@ flex-direction: row;
 export const Button = styled(TouchableOpacity)``;
 
 export const BackButton = styled(Ionicons).attrs(({theme}) => ({
-    color: theme.COLORS.GRAY_300,
-    size: 26,
+        color: theme.COLORS.GRAY_300,
+        size: theme.FONTE_SIZE.XL,
 }))``;

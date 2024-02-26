@@ -4,13 +4,13 @@ import { Button, Container, Icon, InputContainer } from "./style";
 
 type InputProps = TextInputProps & {
     placeholder: string;
-    showIcon?: boolean;
     onChangeText?: (text: string) => void;
     required?: boolean;
     passwordType?: boolean;
+    showSearch?: boolean;
 }
 
-export function Input({ placeholder, onChangeText, showIcon = false, passwordType = false, }: InputProps) {
+export function Input({ placeholder, onChangeText, showSearch = false, passwordType = false, }: InputProps) {
     const [showPassword, setShowPassword] = useState(false);
 
 
@@ -28,6 +28,11 @@ export function Input({ placeholder, onChangeText, showIcon = false, passwordTyp
             {passwordType && (
                 <Button onPress={togglePasswordVisibility}>
                     <Icon name={showPassword ? 'eye' : 'eye-closed'} />
+                </Button>
+            )}
+               {showSearch && (
+                <Button onPress={togglePasswordVisibility}>
+                    <Icon name="search" />
                 </Button>
             )}
         </Container>

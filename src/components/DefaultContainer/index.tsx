@@ -1,7 +1,6 @@
 import React, { ReactNode } from "react";
 import { BackButton, Button, Container } from "./style";
 import { useNavigation } from "@react-navigation/native";
-import { ScrollView } from "react-native";
 
 type DefaultContainerProps = {
     children: ReactNode;

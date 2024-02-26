@@ -33,7 +33,7 @@ export function StackNavigation() {
                 component={SignUp}
             />
             <Screen
-                name='home'
+                name='tabroutes'
                 component={BottomTabsNavigation}
             />
         </Navigator>
