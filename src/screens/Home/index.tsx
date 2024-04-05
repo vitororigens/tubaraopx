@@ -17,31 +17,61 @@ export type ItemData = {
 
 export function Home() {
     const reference = firebase.storage();
-    const [cursos, setCursos] = useState<Array<ItemData>>([]);
+    const [foldersAndCursos, setFoldersAndCursos] = useState<{ title: string, cursos: ItemData[] }[]>([]);
     const [sound, setSound] = useState<Audio.Sound | null>(null);
     const [bottomSheetVisible, setBottomSheetVisible] = useState(false);
     const [selectedCurso, setSelectedCurso] = useState<ItemData | null>(null);
-    const [selectedCursoIndex, setSelectedCursoIndex] = useState<number | null>(null)
+    const [selectedCursoIndex, setSelectedCursoIndex] = useState<number | null>(null);
     const [isPlaying, setIsPlaying] = useState(false);
 
     useEffect(() => {
-        reference
-            .ref('Cursos')
-            .listAll()
-            .then(async res => {
-                const cursosArray: ItemData[] = [];
-                for (const ref of res.items) {
-                    const cursoPath = ref.fullPath;
-                    const url = await reference.ref(cursoPath).getDownloadURL();
-                    const itemData: ItemData = {
-                        cursoName: cursoPath,
-                        cursoUrl: url,
-                    };
-                    cursosArray.push(itemData);
+        const fetchFoldersAndCursos = async () => {
+            try {
+                const foldersRes = await reference.ref().listAll();
+                const foldersAndCursosArray: { title: string, cursos: ItemData[] }[] = [];
+
+                for (const folder of foldersRes.prefixes) {
+                    const folderName = folder.name;
+                    const cursosRes = await reference.ref(folderName).listAll();
+                    const cursosArray: ItemData[] = [];
+
+                    for (const cursoRef of cursosRes.items) {
+                        const CursoName = cursoRef.name;
+                        const cursoPath = cursoRef.fullPath;
+                        const url = await reference.ref(cursoPath).getDownloadURL();
+                        const itemData: ItemData = {
+                            cursoName: CursoName,
+                            cursoUrl: url,
+                        };
+                        cursosArray.push(itemData);
+                    }
+
+                    foldersAndCursosArray.push({ title: folderName, cursos: cursosArray });
                 }
-                setCursos(cursosArray);
-            });
+
+                setFoldersAndCursos(foldersAndCursosArray);
+            } catch (error) {
+                console.error("Erro ao buscar pastas e cursos:", error);
+            }
+        };
+
+        fetchFoldersAndCursos();
     }, []);
+
+    const openBottomSheet = async (curso: ItemData, index: number, ) => {
+        setSelectedCurso(curso);
+        setSelectedCursoIndex(index);
+        setBottomSheetVisible(true);
+        if (sound) {
+            await sound.stopAsync();
+            await sound.unloadAsync();
+        }
+
+        const { sound: audioSound } = await Audio.Sound.createAsync({ uri: curso.cursoUrl });
+        setSound(audioSound);
+        await audioSound.playAsync();
+        setIsPlaying(true);
+    };
 
     const handlePlayAudio = async (audioUrl: string) => {
         if (sound) {
@@ -63,145 +93,64 @@ export function Home() {
     };
 
     const handleForward = async () => {
-        if (selectedCursoIndex !== null && selectedCursoIndex < cursos.length - 1) {
+        if (selectedCursoIndex !== null && selectedCursoIndex ) {
             const nextIndex = selectedCursoIndex + 1;
-            const nextCurso = cursos[nextIndex];
+            const nextCurso = foldersAndCursos[selectedCursoIndex].cursos[nextIndex];
+            console.log(nextIndex)
             setSelectedCurso(nextCurso);
             setSelectedCursoIndex(nextIndex);
             await handlePlayAudio(nextCurso.cursoUrl);
         }
     };
-
+    
     const handleBackward = async () => {
         if (selectedCursoIndex !== null && selectedCursoIndex > 0) {
             const prevIndex = selectedCursoIndex - 1;
-            const prevCurso = cursos[prevIndex];
+            const prevCurso = foldersAndCursos[selectedCursoIndex].cursos[prevIndex];
             setSelectedCurso(prevCurso);
             setSelectedCursoIndex(prevIndex);
             await handlePlayAudio(prevCurso.cursoUrl);
         }
     };
+    
 
-    const openBottomModal = async (curso: ItemData, index: number) => {
-        setSelectedCurso(curso);
-        setSelectedCursoIndex(index);
-        setBottomSheetVisible(true);
-    };
-
-    const openBottomSheet = async (curso: ItemData, index: number) => {
-        if (sound) {
-            await sound.stopAsync();
-            await sound.unloadAsync();
-        }
-
-        const { sound: audioSound } = await Audio.Sound.createAsync({ uri: curso.cursoUrl });
-        setSound(audioSound);
-        await audioSound.playAsync();
-        setIsPlaying(true);
-
-        setSelectedCurso(curso);
-        setSelectedCursoIndex(index);
-        setBottomSheetVisible(true);
-    };
 
     const closeBottomSheet = () => {
         setBottomSheetVisible(false);
     };
-    const data = [
-        { title: "Novos" },
-        { title: "Matemática" },
-        { title: "História" },
-        { title: "Ciências" },
-        { title: "Artes" },
-        { title: "Línguas" }
-    ];
-
 
     return (
         <DefaultContainer>
             <Container>
-                <View style={{
-                    height: 60
-                }}>
-                    <FlatList
-                        showsHorizontalScrollIndicator={false}
-                        data={data}
-                        horizontal={true}
-                        renderItem={({ item }) => (
-                            <Categories title={item.title} />
-                        )}
-                    />
-                </View>
-                <View>
-                    <View style={{
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                        alignItems: 'center'
-                    }}>
-                        <Title>
-                            Novos
-                        </Title>
-                        <Categories title="Mais" />
+                {foldersAndCursos.map((folder, folderIndex) => (
+                    <View key={folderIndex}>
+                        <View style={{
+                            flexDirection: 'row',
+                            justifyContent: 'space-between',
+                            alignItems: 'center'
+                        }}>
+                            <Title>
+                                {folder.title}
+                            </Title>
+                            <Categories title="Mais" />
+                        </View>
+                        <FlatList
+                            showsHorizontalScrollIndicator={false}
+                            horizontal={true}
+                            data={folder.cursos}
+                            renderItem={({ item, index }) => (
+                                <TouchableOpacity onPress={() => openBottomSheet(item, index)}>
+                                    <ItemCursos title={item.cursoName} />
+                                </TouchableOpacity>
+                            )}
+                            keyExtractor={(item) => item.cursoName}
+                        />
                     </View>
-                    <FlatList
-                        showsHorizontalScrollIndicator={false}
-                        horizontal={true}
-                        data={cursos}
-                        renderItem={({ item, index }) => (
-                            <TouchableOpacity onPress={() => openBottomSheet(item, index)}>
-                                <ItemCursos title={item.cursoName} />
-                            </TouchableOpacity>
-                        )}
-                        keyExtractor={(item) => item.cursoName}
-                    />
-                </View>
-                <View>
-                    <View style={{
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                        alignItems: 'center'
-                    }}>
-                        <Title>
-                            Informatica
-                        </Title>
-                        <Categories title="Mais" />
-                    </View>
-                    <FlatList
-                        showsHorizontalScrollIndicator={false}
-                        horizontal={true}
-                        data={cursos}
-                        renderItem={({ item, index }) => (
-                            <TouchableOpacity onPress={() => openBottomSheet(item, index)}>
-                                <ItemCursos title={item.cursoName} />
-                            </TouchableOpacity>
-                        )}
-                        keyExtractor={(item) => item.cursoName}
-                    />
-                </View>
-                <Title>Playlist</Title>
-                <View style={{
-                    flex: 1,
-                  
-                }}>
-                    <FlatList
-                        style={{
-                            marginBottom: 50,
-                            paddingBottom: 200
-                        }}
-                        showsVerticalScrollIndicator={false}
-                        data={cursos}
-                        renderItem={({ item, index }) => (
-                            <TouchableOpacity onPress={() => openBottomSheet(item, index)}>
-                                <Multimidia title={item.cursoName} />
-                            </TouchableOpacity>
-                        )}
-                        keyExtractor={(item) => item.cursoName}
-                    />
-                </View>
+                ))}
             </Container>
             {selectedCurso && (
                 <ButtonModal
-                    showBottomSheet={() => openBottomModal(selectedCurso, selectedCursoIndex || 0)}
+                    showBottomSheet={() => openBottomSheet(selectedCurso, selectedCursoIndex || 0)}
                     title={selectedCurso.cursoName}
                     onPlay={() => isPlaying ? handlePauseAudio() : handlePlayAudio(selectedCurso.cursoUrl)}
                     isPlaying={isPlaying}

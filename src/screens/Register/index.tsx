@@ -160,7 +160,7 @@ export function Register() {
                     <Input
                         passwordType
                         onChangeText={(text) => setUser({ ...user, password: text })}
-                        value={user.password} showIcon placeholder="Cadastre sua senha"
+                        value={user.password} placeholder="Cadastre sua senha"
                         secureTextEntry
                     />
                     {errors.nameError && <Text style={{ color: COLORS.RED_700, marginBottom: 10, marginLeft: 10 }}>{errors.passwordError}</Text>}
@@ -168,7 +168,7 @@ export function Register() {
                         value={user.confirmPassword}
                         passwordType
                         onChangeText={(text) => setUser({ ...user, confirmPassword: text })}
-                        showIcon placeholder="Cadastre sua senha"
+                     placeholder="Cadastre sua senha"
                         secureTextEntry
                     />
                     {errors.nameError && <Text style={{ color: COLORS.RED_700, marginBottom: 10, marginLeft: 10 }}>{errors.confirmPasswordError}</Text>}

@@ -9,8 +9,8 @@ type ContainerModalProps = {
     isPlaying?: boolean;
     title: string;
     showBottomSheet?: (item: ItemData, index: number) => void; 
-    item: ItemData;
-    index: number;
+    item?: ItemData;
+    index?: number;
 };
 
 export function ButtonModal({ onPlay, isPlaying, title, showBottomSheet, item, index }: ContainerModalProps) {

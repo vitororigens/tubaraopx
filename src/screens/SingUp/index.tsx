@@ -45,7 +45,7 @@ export function SignUp() {
                 <Container>
                     <Title>Entrar</Title>
                     <Input onChangeText={setEmail} value={email} placeholder="E-mail" />
-                    <Input passwordType onChangeText={setPassword} value={password} showIcon placeholder="Senha" secureTextEntry />
+                    <Input passwordType onChangeText={setPassword} value={password} placeholder="Senha" secureTextEntry />
                     <Button onPress={handleSingIn} title="Entrar" />
 
                     <Content>
